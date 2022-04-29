@@ -19,14 +19,16 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
+      blogService.setToken(user.token);
     }
-  });
+  }, []);
 
   const handleLog = async (e) => {
     e.preventDefault();
     try {
       const user = await loginService.login({ username, password });
       window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user));
+      blogService.setToken(user.token);
       setUser(user);
       setUsername('');
       setPassword('');
@@ -36,8 +38,12 @@ const App = () => {
         setErrorMessage(null);
       }, 5000);
     }
+  };
 
-    console.log('logging in with', username, password);
+  const logout = (e) => {
+    e.preventDefault();
+    window.localStorage.clear();
+    window.location.reload(false);
   };
 
   if (user === null) {
@@ -73,7 +79,7 @@ const App = () => {
     <div>
       <h2>blogs</h2>
       <div>
-        {user.name} logged-in <button>logout</button>
+        {user.name} logged-in <button onClick={logout}>logout</button>
       </div>
       {blogs.map((blog) => (
         <Blog key={blog.id} blog={blog} />
