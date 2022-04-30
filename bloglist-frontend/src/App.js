@@ -24,15 +24,19 @@ const App = () => {
     }
   }, []);
 
-  const addBlog = (e) => {
+  const addBlog = async (e) => {
     e.preventDefault();
     const blogObj = {
       title: newBlog.title,
       author: newBlog.author,
       url: newBlog.url
     };
-
-    console.log(blogObj);
+    try {
+      const createBlog = await blogService.create(blogObj);
+      console.log(createBlog);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleLog = async (e) => {
