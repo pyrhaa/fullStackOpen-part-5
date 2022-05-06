@@ -33,7 +33,8 @@ const App = () => {
     };
     try {
       const createBlog = await blogService.create(blogObj);
-      console.log(createBlog);
+      setBlogs(blogs.concat(createBlog));
+      setNewBlog({ title: '', author: '', url: '' });
     } catch (err) {
       console.log(err);
     }
