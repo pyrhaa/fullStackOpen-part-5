@@ -8,6 +8,8 @@ const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' });
   const [errorMessage, setErrorMessage] = useState(null);
+  const [message, setMessage] = useState(true);
+  const [notif, setNotif] = useState('hello');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
@@ -16,8 +18,7 @@ const App = () => {
     const fetchblogs = async () => {
       const response = await blogService.getAll();
       if (response) {
-        console.log(response);
-        setBlogs(response.data);
+        setBlogs(response);
       }
     };
     fetchblogs();
@@ -103,7 +104,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      <Notification message={errorMessage} />
+      <Notification res={message} text={notif} />
       <div>
         {user.name} logged-in <button onClick={logout}>logout</button>
       </div>
