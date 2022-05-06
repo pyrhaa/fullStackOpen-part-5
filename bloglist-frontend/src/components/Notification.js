@@ -10,14 +10,25 @@ const error = {
   margin_bottom: 10
 };
 
+// const success = {
+//   color: 'green',
+//   background: 'lightgrey',
+//   font_size: 20,
+//   border_style: 'solid',
+//   border_color: 'green',
+//   border_radius: 5,
+//   padding: 10,
+//   margin_bottom: 10
+// };
+
 const success = {
   color: 'green',
+  border: '4px solid green',
   background: 'lightgrey',
-  font_size: 20,
-  border_style: 'solid',
-  border_radius: 5,
+  fontSize: 20,
+  borderRadius: 5,
   padding: 10,
-  margin_bottom: 10
+  marginBottom: 10
 };
 
 const Notification = ({ res, text }) => {
