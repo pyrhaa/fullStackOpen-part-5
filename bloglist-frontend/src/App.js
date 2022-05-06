@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Blog from './components/Blog';
+import Notification from './components/Notification';
 import blogService from './services/blogs';
 import loginService from './services/login';
 
@@ -12,7 +13,14 @@ const App = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs));
+    const fetchblogs = async () => {
+      const response = await blogService.getAll();
+      if (response) {
+        console.log(response);
+        setBlogs(response.data);
+      }
+    };
+    fetchblogs();
   }, []);
 
   useEffect(() => {
@@ -95,6 +103,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
+      <Notification message={errorMessage} />
       <div>
         {user.name} logged-in <button onClick={logout}>logout</button>
       </div>
