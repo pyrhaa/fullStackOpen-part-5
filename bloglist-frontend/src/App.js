@@ -8,8 +8,8 @@ const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' });
   const [errorMessage, setErrorMessage] = useState(null);
-  const [message, setMessage] = useState(true);
-  const [notif, setNotif] = useState('hello');
+  const [message, setMessage] = useState(null);
+  const [notif, setNotif] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
@@ -43,7 +43,12 @@ const App = () => {
     try {
       const createBlog = await blogService.create(blogObj);
       setBlogs(blogs.concat(createBlog));
-      setNewBlog({ title: '', author: '', url: '' });
+      setMessage(true);
+      setNotif(`A new blog <<${newBlog.title}>> by ${newBlog.author} added`);
+      setTimeout(() => {
+        setMessage(null);
+        setNewBlog({ title: '', author: '', url: '' });
+      }, 5000);
     } catch (err) {
       console.log(err);
     }
