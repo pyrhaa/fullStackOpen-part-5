@@ -7,7 +7,6 @@ import loginService from './services/login';
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' });
-  const [errorMessage, setErrorMessage] = useState(null);
   const [message, setMessage] = useState(null);
   const [notif, setNotif] = useState('');
   const [username, setUsername] = useState('');
@@ -48,6 +47,7 @@ const App = () => {
       setTimeout(() => {
         setMessage(null);
         setNewBlog({ title: '', author: '', url: '' });
+        setNotif('');
       }, 5000);
     } catch (err) {
       console.log(err);
@@ -64,9 +64,12 @@ const App = () => {
       setUsername('');
       setPassword('');
     } catch (err) {
-      setErrorMessage('Wrong credentials');
+      setMessage(false);
+      setNotif('wrong username or password');
+      console.log(err);
       setTimeout(() => {
-        setErrorMessage(null);
+        setMessage(null);
+        setNotif('');
       }, 5000);
     }
   };
@@ -80,6 +83,7 @@ const App = () => {
   if (user === null) {
     return (
       <div>
+        <Notification res={message} text={notif} />
         <h2>log in to application</h2>
         <form onSubmit={handleLog}>
           <div>

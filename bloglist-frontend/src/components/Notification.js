@@ -30,7 +30,6 @@ const Notification = ({ res, text }) => {
       </div>
     );
   } else {
-    console.log('Oho, something wrong happens !');
     return (
       <div id="error" style={error}>
         {text}
