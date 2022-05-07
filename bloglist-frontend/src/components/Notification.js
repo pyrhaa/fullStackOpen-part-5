@@ -2,24 +2,13 @@ import React from 'react';
 
 const error = {
   color: 'red',
+  border: '4px solid red',
   background: 'lightgrey',
-  font_size: 20,
-  border_style: 'solid',
-  border_radius: 5,
+  fontSize: 20,
+  borderRadius: 5,
   padding: 10,
-  margin_bottom: 10
+  marginBottom: 10
 };
-
-// const success = {
-//   color: 'green',
-//   background: 'lightgrey',
-//   font_size: 20,
-//   border_style: 'solid',
-//   border_color: 'green',
-//   border_radius: 5,
-//   padding: 10,
-//   margin_bottom: 10
-// };
 
 const success = {
   color: 'green',
@@ -42,6 +31,11 @@ const Notification = ({ res, text }) => {
     );
   } else {
     console.log('Oho, something wrong happens !');
+    return (
+      <div id="error" style={error}>
+        {text}
+      </div>
+    );
   }
 };
 

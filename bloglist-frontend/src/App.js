@@ -16,9 +16,9 @@ const App = () => {
 
   useEffect(() => {
     const fetchblogs = async () => {
-      const response = await blogService.getAll();
-      if (response) {
-        setBlogs(response);
+      const data = await blogService.getAll();
+      if (data) {
+        setBlogs(data);
       }
     };
     fetchblogs();
