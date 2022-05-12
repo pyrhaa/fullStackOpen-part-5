@@ -8,7 +8,7 @@ import loginService from './services/login';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-  const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' });
+
   const [message, setMessage] = useState(null);
   const [notif, setNotif] = useState('');
   const [username, setUsername] = useState('');
@@ -34,27 +34,7 @@ const App = () => {
     }
   }, []);
 
-  const addBlog = async (e) => {
-    e.preventDefault();
-    const blogObj = {
-      title: newBlog.title,
-      author: newBlog.author,
-      url: newBlog.url
-    };
-    try {
-      const createBlog = await blogService.create(blogObj);
-      setBlogs(blogs.concat(createBlog));
-      setMessage(true);
-      setNotif(`A new blog <<${newBlog.title}>> by ${newBlog.author} added`);
-      setTimeout(() => {
-        setMessage(null);
-        setNewBlog({ title: '', author: '', url: '' });
-        setNotif('');
-      }, 5000);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const addBlog = () => {};
 
   const handleLog = async (e) => {
     e.preventDefault();
@@ -131,7 +111,6 @@ const App = () => {
           handleUrlChange={({ target }) =>
             setNewBlog({ ...newBlog, url: target.value })
           }
-          onSubmit={addBlog}
           newBlog={newBlog}
         />
       </Togglable>

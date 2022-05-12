@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const BlogForm = ({
-  handleTitleChange,
-  handleAuthorChange,
-  handleUrlChange,
-  onSubmit,
-  newBlog
-}) => {
+const BlogForm = ({ createBlog }) => {
+  const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' });
+
+  const addBlog = async (e) => {
+    e.preventDefault();
+    const blogObj = {
+      title: newBlog.title,
+      author: newBlog.author,
+      url: newBlog.url
+    };
+    try {
+      const creaBlog = await blogService.create(blogObj);
+      setBlogs(blogs.concat(creaBlog));
+      setMessage(true);
+      setNotif(`A new blog <<${newBlog.title}>> by ${newBlog.author} added`);
+      setTimeout(() => {
+        setMessage(null);
+        setNewBlog({ title: '', author: '', url: '' });
+        setNotif('');
+      }, 5000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={addBlog}>
       <div>
         title:
         <input
