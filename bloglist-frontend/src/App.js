@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Blog from './components/Blog';
 import Notification from './components/Notification';
-// import BlogForm from './components/BlogForm';
+import BlogForm from './components/BlogForm';
 import blogService from './services/blogs';
 import loginService from './services/login';
 
@@ -119,48 +119,19 @@ const App = () => {
         {user.name} logged-in <button onClick={logout}>logout</button>
       </div>
       <h2>create new</h2>
-      {/* <BlogForm handleTitleChange={({ target }) =>
-              setNewBlog({ ...newBlog, title: target.value })} handleAuthorChange={({ target }) =>
-              setNewBlog({ ...newBlog, author: target.value })
-            } handleUrlChange={({ target }) =>
-              setNewBlog({ ...newBlog, url: target.value })
-            } onSubmit={addBlog} /> */}
-      <form onSubmit={addBlog}>
-        <div>
-          title:
-          <input
-            type="text"
-            name="Title"
-            value={newBlog.title}
-            onChange={({ target }) =>
-              setNewBlog({ ...newBlog, title: target.value })
-            }
-          />
-        </div>
-        <div>
-          author:
-          <input
-            type="text"
-            name="Author"
-            value={newBlog.author}
-            onChange={({ target }) =>
-              setNewBlog({ ...newBlog, author: target.value })
-            }
-          />
-        </div>
-        <div>
-          url:
-          <input
-            type="text"
-            name="Url"
-            value={newBlog.url}
-            onChange={({ target }) =>
-              setNewBlog({ ...newBlog, url: target.value })
-            }
-          />
-        </div>
-        <button type="submit">create</button>
-      </form>
+      <BlogForm
+        handleTitleChange={({ target }) =>
+          setNewBlog({ ...newBlog, title: target.value })
+        }
+        handleAuthorChange={({ target }) =>
+          setNewBlog({ ...newBlog, author: target.value })
+        }
+        handleUrlChange={({ target }) =>
+          setNewBlog({ ...newBlog, url: target.value })
+        }
+        onSubmit={addBlog}
+        newBlog={newBlog}
+      />
       <ul>
         {blogs.map((blog) => (
           <Blog key={blog.id} blog={blog} />
