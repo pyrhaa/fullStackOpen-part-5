@@ -3,26 +3,14 @@ import React, { useState } from 'react';
 const BlogForm = ({ createBlog }) => {
   const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' });
 
-  const addBlog = async (e) => {
+  const addBlog = (e) => {
     e.preventDefault();
-    const blogObj = {
+    createBlog({
       title: newBlog.title,
       author: newBlog.author,
       url: newBlog.url
-    };
-    try {
-      const creaBlog = await blogService.create(blogObj);
-      setBlogs(blogs.concat(creaBlog));
-      setMessage(true);
-      setNotif(`A new blog <<${newBlog.title}>> by ${newBlog.author} added`);
-      setTimeout(() => {
-        setMessage(null);
-        setNewBlog({ title: '', author: '', url: '' });
-        setNotif('');
-      }, 5000);
-    } catch (err) {
-      console.log(err);
-    }
+    });
+    setNewBlog({ title: '', author: '', url: '' });
   };
 
   return (
@@ -33,7 +21,9 @@ const BlogForm = ({ createBlog }) => {
           type="text"
           name="Title"
           value={newBlog.title}
-          onChange={handleTitleChange}
+          onChange={({ target }) =>
+            setNewBlog({ ...newBlog, title: target.value })
+          }
         />
       </div>
       <div>
@@ -42,7 +32,9 @@ const BlogForm = ({ createBlog }) => {
           type="text"
           name="Author"
           value={newBlog.author}
-          onChange={handleAuthorChange}
+          onChange={({ target }) =>
+            setNewBlog({ ...newBlog, author: target.value })
+          }
         />
       </div>
       <div>
@@ -51,7 +43,9 @@ const BlogForm = ({ createBlog }) => {
           type="text"
           name="Url"
           value={newBlog.url}
-          onChange={handleUrlChange}
+          onChange={({ target }) =>
+            setNewBlog({ ...newBlog, url: target.value })
+          }
         />
       </div>
       <button type="submit">create</button>

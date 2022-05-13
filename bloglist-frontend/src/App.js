@@ -34,7 +34,20 @@ const App = () => {
     }
   }, []);
 
-  const addBlog = () => {};
+  const addBlog = async (blogObject) => {
+    try {
+      const creaBlog = await blogService.create(blogObject);
+      setBlogs(blogs.concat(creaBlog));
+      setMessage(true);
+      setNotif(`A new blog <<${creaBlog.title}>> by ${creaBlog.author} added`);
+      setTimeout(() => {
+        setMessage(null);
+        setNotif('');
+      }, 5000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleLog = async (e) => {
     e.preventDefault();
@@ -99,20 +112,9 @@ const App = () => {
       <div>
         {user.name} logged-in <button onClick={logout}>logout</button>
       </div>
-      <h2>create new</h2>
+      <h2>create new blog</h2>
       <Togglable buttonLabel="Blog Form">
-        <BlogForm
-          handleTitleChange={({ target }) =>
-            setNewBlog({ ...newBlog, title: target.value })
-          }
-          handleAuthorChange={({ target }) =>
-            setNewBlog({ ...newBlog, author: target.value })
-          }
-          handleUrlChange={({ target }) =>
-            setNewBlog({ ...newBlog, url: target.value })
-          }
-          newBlog={newBlog}
-        />
+        <BlogForm createBlog={addBlog} />
       </Togglable>
 
       <ul>
