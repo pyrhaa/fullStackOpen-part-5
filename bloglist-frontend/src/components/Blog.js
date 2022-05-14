@@ -1,9 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import ShowHide from './ShowHide';
 
 const Blog = ({ blog }) => {
-  const [showAll, setShowAll] = useState(false);
-
   const blogFullRef = useRef();
 
   const blogStyle = {
@@ -18,15 +16,18 @@ const Blog = ({ blog }) => {
     return (
       <div>
         <p>{blog.url}</p>
+        <div>
+          <p>likes {blog.likes}</p>
+          <button>like up</button>
+        </div>
+        <p>{blog.author}</p>
       </div>
     );
   };
 
   return (
     <div style={blogStyle}>
-      <div>
-        {blog.title} {blog.author} <button>view</button>
-      </div>
+      <div>{blog.title}</div>
       <ShowHide buttonLabel="view" ref={blogFullRef}>
         <FullBlogDetails />
       </ShowHide>
