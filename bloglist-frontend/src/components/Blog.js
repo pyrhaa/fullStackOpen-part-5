@@ -14,8 +14,7 @@ const Blog = ({ blog }) => {
     marginBottom: 5
   };
 
-  const fullBlogDetails = () => {
-    blogFullRef.current.toggleVisibility();
+  const FullBlogDetails = () => {
     return (
       <div>
         <p>{blog.url}</p>
@@ -28,6 +27,9 @@ const Blog = ({ blog }) => {
       <div>
         {blog.title} {blog.author} <button>view</button>
       </div>
+      <ShowHide buttonLabel="view" ref={blogFullRef}>
+        <FullBlogDetails />
+      </ShowHide>
     </div>
   );
 };
