@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Blog from './components/Blog';
 import Notification from './components/Notification';
 import BlogForm from './components/BlogForm';
@@ -8,12 +8,13 @@ import loginService from './services/login';
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
-
   const [message, setMessage] = useState(null);
   const [notif, setNotif] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
+
+  const blogFormRef = useRef();
 
   useEffect(() => {
     const fetchblogs = async () => {
@@ -113,7 +114,7 @@ const App = () => {
         {user.name} logged-in <button onClick={logout}>logout</button>
       </div>
       <h2>create new blog</h2>
-      <Togglable buttonLabel="Blog Form">
+      <Togglable buttonLabel="Blog Form" ref={blogFormRef}>
         <BlogForm createBlog={addBlog} />
       </Togglable>
 

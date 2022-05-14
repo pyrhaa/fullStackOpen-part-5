@@ -12,7 +12,7 @@ const Blog = ({ blog }) => {
   return (
     <div style={blogStyle}>
       <div>
-        {blog.title} {blog.author}
+        {blog.title} {blog.author} <button>view</button>
       </div>
     </div>
   );
