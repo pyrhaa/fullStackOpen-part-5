@@ -51,8 +51,9 @@ const App = () => {
     }
   };
 
-  const updateBlog = async (id, blogObject) => {
+  const updateBlog = async (blogObject) => {
     try {
+      const id = blogObject.id;
       const updatedBlog = await blogService.update(id, blogObject);
       setBlogs(blogs.filter((blog) => blog.id !== id).concat(updatedBlog));
       setNotif(

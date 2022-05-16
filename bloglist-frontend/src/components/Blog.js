@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import ShowHide from './ShowHide';
 
 const Blog = ({ blog, upBlog }) => {
@@ -18,7 +18,7 @@ const Blog = ({ blog, upBlog }) => {
       ...blog,
       likes: blog.likes + 1
     };
-
+    upBlog(updatedBlog);
     console.log(updatedBlog);
   };
 
