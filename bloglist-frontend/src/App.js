@@ -54,7 +54,16 @@ const App = () => {
   const updateBlog = async (id, blogObject) => {
     try {
       const updatedBlog = await blogService.update(id, blogObject);
+      setBlogs(blogs.filter((blog) => blog.id !== id).concat(updatedBlog));
+      setNotif(
+        `The blog <<${updatedBlog.title}>> have ${updatedBlog.likes} likes now`
+      );
+      setTimeout(() => {
+        setMessage(null);
+        setNotif('');
+      }, 5000);
     } catch (err) {
+      console.log('like function of blog fail');
       console.log(err);
     }
   };
