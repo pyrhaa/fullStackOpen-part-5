@@ -57,7 +57,7 @@ const App = () => {
         const deletedBlog = await blogService.deletes(id);
         setBlogs(blogs.filter((blog) => blog.id !== deletedBlog.id));
         setMessage(true);
-        setNotif(`The blog <<${deletedBlog.title}>> have been removed`);
+        setNotif(`The blog <<${blogObject.title}>> have been removed`);
         setTimeout(() => {
           setMessage(null);
         }, 5000);
