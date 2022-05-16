@@ -51,6 +51,12 @@ const App = () => {
     }
   };
 
+  const updateBlog = async (blogObject) => {
+    try {
+      const updatedBlog = await blogService.update(blogObject);
+    } catch (err) {}
+  };
+
   const handleLog = async (e) => {
     e.preventDefault();
     try {
