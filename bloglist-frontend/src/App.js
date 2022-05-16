@@ -50,20 +50,20 @@ const App = () => {
     }
   };
 
-  const deleteBlog = async (blogObject) => {
-    const id = blogObject.id;
-    if (window.confirm(`Delete ${blogObject.title}`)) {
-      try {
-        const deletedBlog = await blogService.deletes(id);
-        setBlogs(blogs.filter((blog) => blog.id !== deletedBlog.id));
-        setMessage(true);
-        setNotif(`The blog <<${blogObject.title}>> have been removed`);
-        setTimeout(() => {
-          setMessage(null);
-        }, 5000);
-      } catch (err) {
-        console.log(err);
-      }
+  const deleteBlog = async (id) => {
+    try {
+      console.log('before:', blogs);
+      const deletedBlog = await blogService.deletes(id);
+      console.log('deletdblog:', deletedBlog);
+      setBlogs(blogs.filter((blog) => blog.id !== id));
+      console.log('after:', blogs);
+      setMessage(true);
+      setNotif(`The blog have been removed`);
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+    } catch (err) {
+      console.log(err);
     }
   };
 

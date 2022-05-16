@@ -23,7 +23,9 @@ const Blog = ({ blog, upBlog, removeBlog }) => {
 
   const deleted = (e) => {
     e.preventDefault();
-    removeBlog(blog);
+    if (window.confirm(`Delete ${blog.title}`)) {
+      removeBlog(blog.id);
+    }
   };
 
   const FullBlogDetails = () => {
