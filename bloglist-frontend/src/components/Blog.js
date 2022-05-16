@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import ShowHide from './ShowHide';
 
-const Blog = ({ blog, upBlog }) => {
+const Blog = ({ blog, upBlog, removeBlog }) => {
   const blogFullRef = useRef();
 
   const blogStyle = {
@@ -19,7 +19,11 @@ const Blog = ({ blog, upBlog }) => {
       likes: blog.likes + 1
     };
     upBlog(updatedBlog);
-    console.log(updatedBlog);
+  };
+
+  const deleted = (e) => {
+    e.preventDefault();
+    removeBlog(blog);
   };
 
   const FullBlogDetails = () => {
@@ -41,6 +45,7 @@ const Blog = ({ blog, upBlog }) => {
       <ShowHide buttonLabel="view" ref={blogFullRef}>
         <FullBlogDetails />
       </ShowHide>
+      <button onClick={deleted}>Remove</button>
     </div>
   );
 };

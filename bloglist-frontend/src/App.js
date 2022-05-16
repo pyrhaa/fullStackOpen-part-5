@@ -44,10 +44,26 @@ const App = () => {
       setNotif(`A new blog <<${creaBlog.title}>> by ${creaBlog.author} added`);
       setTimeout(() => {
         setMessage(null);
-        setNotif('');
       }, 5000);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const deleteBlog = async (blogObject) => {
+    const id = blogObject.id;
+    if (window.confirm(`Delete ${blogObject.title}`)) {
+      try {
+        const deletedBlog = await blogService.deletes(id);
+        setBlogs(blogs.filter((blog) => blog.id !== deletedBlog.id));
+        setMessage(true);
+        setNotif(`The blog <<${deletedBlog.title}>> have been removed`);
+        setTimeout(() => {
+          setMessage(null);
+        }, 5000);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -56,15 +72,14 @@ const App = () => {
       const id = blogObject.id;
       const updatedBlog = await blogService.update(id, blogObject);
       setBlogs(blogs.filter((blog) => blog.id !== id).concat(updatedBlog));
+      setMessage(true);
       setNotif(
-        `The blog <<${updatedBlog.title}>> have ${updatedBlog.likes} likes now`
+        `The blog <<${updatedBlog.title}>> have ${updatedBlog.likes} likes now !`
       );
       setTimeout(() => {
         setMessage(null);
-        setNotif('');
       }, 5000);
     } catch (err) {
-      console.log('like function of blog fail');
       console.log(err);
     }
   };
@@ -84,7 +99,6 @@ const App = () => {
       console.log(err);
       setTimeout(() => {
         setMessage(null);
-        setNotif('');
       }, 5000);
     }
   };
@@ -141,7 +155,12 @@ const App = () => {
         {blogs
           .sort((a, b) => b.likes - a.likes)
           .map((blog) => (
-            <Blog key={blog.id} blog={blog} upBlog={updateBlog} />
+            <Blog
+              key={blog.id}
+              blog={blog}
+              removeBlog={deleteBlog}
+              upBlog={updateBlog}
+            />
           ))}
       </ul>
     </div>

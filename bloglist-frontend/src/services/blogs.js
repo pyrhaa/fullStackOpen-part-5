@@ -26,12 +26,12 @@ const update = async (id, newObject) => {
   return response.data;
 };
 
-const deletes = async (id, deleteObject) => {
+const deletes = async (id) => {
   const config = {
     headers: { Authorization: token }
   };
 
-  const response = await axios.delete(`${baseUrl}/${id}`, deleteObject, config);
+  const response = await axios.delete(`${baseUrl}/${id}`, config);
   return response.data;
 };
 
