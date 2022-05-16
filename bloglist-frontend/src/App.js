@@ -51,10 +51,12 @@ const App = () => {
     }
   };
 
-  const updateBlog = async (blogObject) => {
+  const updateBlog = async (id, blogObject) => {
     try {
-      const updatedBlog = await blogService.update(blogObject);
-    } catch (err) {}
+      const updatedBlog = await blogService.update(id, blogObject);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleLog = async (e) => {
