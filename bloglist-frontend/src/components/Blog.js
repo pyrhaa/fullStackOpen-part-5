@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import ShowHide from './ShowHide';
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, upBlog }) => {
   const blogFullRef = useRef();
 
   const blogStyle = {
@@ -12,13 +12,23 @@ const Blog = ({ blog }) => {
     marginBottom: 5
   };
 
+  const likeUp = (e) => {
+    e.preventDefault();
+    const updatedBlog = {
+      ...blog,
+      likes: blog.likes + 1
+    };
+
+    console.log(updatedBlog);
+  };
+
   const FullBlogDetails = () => {
     return (
       <div>
         <p>{blog.url}</p>
         <div>
           <p>likes {blog.likes}</p>
-          <button>like up</button>
+          <button onClick={likeUp}>like up</button>
         </div>
         <p>{blog.author}</p>
       </div>
