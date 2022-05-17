@@ -29,4 +29,6 @@ const ShowHide = forwardRef((props, ref) => {
   );
 });
 
+ShowHide.displayName = 'ShowHide';
+
 export default ShowHide;
