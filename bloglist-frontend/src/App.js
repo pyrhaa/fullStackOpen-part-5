@@ -58,7 +58,7 @@ const App = () => {
       setBlogs(blogs.filter((blog) => blog.id !== id));
       console.log('after:', blogs);
       setMessage(true);
-      setNotif(`The blog have been removed`);
+      setNotif('The blog have been removed');
       setTimeout(() => {
         setMessage(null);
       }, 5000);
