@@ -28,7 +28,26 @@ describe('<Blog />', () => {
     expect(title).toBeDefined();
     expect(author).toBeDefined();
 
+    const details = component.container.querySelector('.showContent');
+    expect(details).toHaveStyle('display: none');
+  });
+
+  test('shows blog details on click button', () => {
+    const button = screen.getByText('view');
+    userEvent.click(button);
+
     const details = component.container.querySelector('.blogDetails');
-    expect(details).toBe(null);
+    expect(details).toBeDefined();
+  });
+
+  test('hide button closes details', () => {
+    const button = screen.getByText('view');
+    userEvent.click(button);
+
+    const closeButton = screen.getByText('hide');
+    userEvent.click(closeButton);
+
+    const details = component.container.querySelector('.showContent');
+    expect(details).toHaveStyle('display: none');
   });
 });

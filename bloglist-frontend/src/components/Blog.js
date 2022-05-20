@@ -44,7 +44,7 @@ const Blog = ({ blog, upBlog, removeBlog }) => {
     <div style={blogStyle}>
       <p className="blogTitle">{blog.title}</p>
       <p className="blogAuthor">by {blog.author}</p>
-      <ShowHide buttonLabel="view" ref={blogFullRef}>
+      <ShowHide className="showHide" buttonLabel="view" ref={blogFullRef}>
         <FullBlogDetails className="blogDetails" />
       </ShowHide>
       <button onClick={deleted}>Remove</button>
