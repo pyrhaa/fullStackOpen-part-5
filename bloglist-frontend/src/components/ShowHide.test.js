@@ -33,7 +33,14 @@ describe('<ShowHide />', () => {
     expect(div).not.toHaveStyle('display: none');
   });
 
-  test('', () => {});
-  test('', () => {});
-  test('', () => {});
+  test('toggled content can be closed', () => {
+    const button = screen.getByText('view');
+    userEvent.click(button);
+
+    const closeButton = screen.getByText('hide');
+    userEvent.click(closeButton);
+
+    const div = container.querySelector('.showContent');
+    expect(div).toHaveStyle('display: none');
+  });
 });
