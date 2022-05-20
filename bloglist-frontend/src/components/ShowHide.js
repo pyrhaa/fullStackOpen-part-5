@@ -21,7 +21,7 @@ const ShowHide = forwardRef((props, ref) => {
       <div style={hideWhenVisible}>
         <button onClick={toggleVisibility}>{props.buttonLabel}</button>
       </div>
-      <div style={showWhenVisible}>
+      <div style={showWhenVisible} className="showContent">
         {props.children}
         <button onClick={toggleVisibility}>hide</button>
       </div>
