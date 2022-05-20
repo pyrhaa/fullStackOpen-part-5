@@ -39,6 +39,7 @@
   },
   "proxy": "http://localhost:3003",
   "devDependencies": {
+    "@testing-library/dom": "^8.13.0",
     "@testing-library/user-event": "^14.2.0",
     "eslint-plugin-jest": "^24.7.0",
     "jest-watch-typeahead": "^0.6.5"

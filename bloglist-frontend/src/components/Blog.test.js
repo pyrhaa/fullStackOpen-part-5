@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Blog from './Blog';
 
@@ -54,11 +54,10 @@ describe('<Blog />', () => {
     const viewButton = screen.getByText('view');
     userEvent.click(viewButton);
 
-    expect(viewButton).toHaveBeenCalledTimes(1);
+    const like = component.getByText('like');
+    fireEvent.click(like);
+    fireEvent.click(like);
 
-    const likesButton = screen.getByText('like');
-    userEvent.click(likesButton);
-
-    expect(mockHandler.mock.calls).toHaveLength(1);
+    expect(mockHandler.mock.calls).toHaveLength(2);
   });
 });
