@@ -14,10 +14,11 @@ const BlogForm = ({ createBlog }) => {
   };
 
   return (
-    <form onSubmit={addBlog}>
+    <form className="form" onSubmit={addBlog}>
       <div>
         title:
         <input
+          className="titleInput"
           type="text"
           name="Title"
           value={newBlog.title}
@@ -29,6 +30,7 @@ const BlogForm = ({ createBlog }) => {
       <div>
         author:
         <input
+          className="authorInput"
           type="text"
           name="Author"
           value={newBlog.author}
@@ -40,6 +42,7 @@ const BlogForm = ({ createBlog }) => {
       <div>
         url:
         <input
+          className="urlInput"
           type="text"
           name="Url"
           value={newBlog.url}
@@ -48,7 +51,9 @@ const BlogForm = ({ createBlog }) => {
           }
         />
       </div>
-      <button type="submit">create</button>
+      <button className="submitBtn" type="submit">
+        create
+      </button>
     </form>
   );
 };
