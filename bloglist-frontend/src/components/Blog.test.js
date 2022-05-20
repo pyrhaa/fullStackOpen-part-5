@@ -14,12 +14,10 @@ describe('<Blog />', () => {
       title: 'Tamazgha: the real north Africa',
       author: 'Yan Amazigh',
       url: 'www.tamaz.tm',
-      likes: 10000000000
+      likes: 100
     };
 
-    component = render(
-      <Blog blog={blog} removeBlog={mockHandler} upBlog={mockHandler} />
-    );
+    component = render(<Blog blog={blog} upBlog={mockHandler} />);
   });
 
   test('render title & author, not url & likes', () => {
@@ -36,8 +34,9 @@ describe('<Blog />', () => {
     const button = screen.getByText('view');
     userEvent.click(button);
 
-    const details = component.container.querySelector('.blogDetails');
+    const details = component.container.querySelector('.blog');
     expect(details).toBeDefined();
+    expect(details).not.toHaveStyle('display: none');
   });
 
   test('hide button closes details', () => {
@@ -49,5 +48,17 @@ describe('<Blog />', () => {
 
     const details = component.container.querySelector('.showContent');
     expect(details).toHaveStyle('display: none');
+  });
+
+  test('calls the handler likes twice when double cliked', () => {
+    const viewButton = screen.getByText('view');
+    userEvent.click(viewButton);
+
+    expect(viewButton).toHaveBeenCalledTimes(1);
+
+    const likesButton = screen.getByText('like');
+    userEvent.click(likesButton);
+
+    expect(mockHandler.mock.calls).toHaveLength(1);
   });
 });

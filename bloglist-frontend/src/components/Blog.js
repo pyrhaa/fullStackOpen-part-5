@@ -34,14 +34,14 @@ const Blog = ({ blog, upBlog, removeBlog }) => {
         <p>{blog.url}</p>
         <div>
           <p>likes {blog.likes}</p>
-          <button onClick={likeUp}>like up</button>
+          <button onClick={likeUp}>like</button>
         </div>
       </div>
     );
   };
 
   return (
-    <div style={blogStyle}>
+    <div className="blog" style={blogStyle}>
       <p className="blogTitle">{blog.title}</p>
       <p className="blogAuthor">by {blog.author}</p>
       <ShowHide className="showHide" buttonLabel="view" ref={blogFullRef}>
