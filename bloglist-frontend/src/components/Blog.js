@@ -42,10 +42,10 @@ const Blog = ({ blog, upBlog, removeBlog }) => {
 
   return (
     <div style={blogStyle}>
-      <p>{blog.title}</p>
-      <p>by {blog.author}</p>
+      <p className="blogTitle">{blog.title}</p>
+      <p className="blogAuthor">by {blog.author}</p>
       <ShowHide buttonLabel="view" ref={blogFullRef}>
-        <FullBlogDetails />
+        <FullBlogDetails className="blogDetails" />
       </ShowHide>
       <button onClick={deleted}>Remove</button>
     </div>
