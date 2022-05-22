@@ -8,6 +8,7 @@ const loginRouter = require('./controllers/login');
 const middleware = require('./utils/middleware');
 const logger = require('./utils/logger');
 const mongoose = require('mongoose');
+const testingRouter = require('./controllers/testing');
 
 logger.info('connecting to', config.MONGODB_URI);
 
