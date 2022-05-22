@@ -7,8 +7,10 @@ describe('Blog app', function () {
   });
   it('user can log in', function () {
     cy.contains('login').click();
-    cy.get('#username').type('user');
-    cy.get('#password').type('userpassword');
+    cy.get('#username').type('user2');
+    cy.get('#password').type('user2');
     cy.get('#login-button').click();
   });
 });
+
+// describe('');
