@@ -7,8 +7,8 @@ describe('Blog app', function () {
       name: 'user2',
       password: 'user2'
     };
-    cy.request('POST', 'http://localhost:3003/api/users/', user);
-    cy.visit('http://localhost:3000');
+    // cy.request('POST', 'http://localhost:3003/api/users/', user);
+    // cy.visit('http://localhost:3000');
   });
 
   it('front page can be opened', function () {
@@ -20,6 +20,10 @@ describe('Blog app', function () {
     cy.get('#password').type('user2');
     cy.get('#login-button').click();
   });
+  it('Login form is shown', function () {
+    cy.contains('username');
+    cy.contains('password');
+    cy.contains('login');
+  });
+  // describe('Login', function(){})
 });
-
-// describe('');
