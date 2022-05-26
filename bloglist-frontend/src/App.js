@@ -164,6 +164,7 @@ const App = () => {
               blog={blog}
               removeBlog={deleteBlog}
               upBlog={updateBlog}
+              className="blog"
             />
           ))}
       </ul>

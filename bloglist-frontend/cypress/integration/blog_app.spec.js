@@ -59,7 +59,14 @@ describe('Blog app', function () {
         cy.createBlog({
           title: 'a blog created by cypress',
           author: 'Cypress',
-          url: 'http//www.newBlog.com'
+          url: 'http//www.newBlog.com',
+          likes: 0
+        });
+        cy.createBlog({
+          title: 'another blog',
+          author: 'Cypress',
+          url: 'http//www.newBlog.com',
+          likes: 0
         });
       });
       it('A blog can be created', function () {
@@ -73,7 +80,7 @@ describe('Blog app', function () {
         cy.contains('a blog created by cypress');
         cy.contains('view').click();
         cy.contains('likes 0');
-        cy.get('.likeBtn').click();
+        cy.get('#likeBtn').click();
         cy.contains('likes 1');
       });
 
@@ -92,6 +99,17 @@ describe('Blog app', function () {
         cy.contains('a blog created by cypress');
         cy.contains('Remove').click();
         cy.get('html').should('contain', 'a blog created by cypress');
+      });
+
+      it('blogs ordered according to likes', function () {
+        cy.get('.blog').eq(0).should('contain', 'a blog created by cypress');
+        cy.get('.blog').eq(1).should('contain', 'another blog');
+
+        cy.get('.blog').eq(1).contains('view').click();
+        cy.get('.blog').eq(1).contains('Like').click();
+
+        cy.get('.blog').eq(0).should('contain', 'another blog');
+        cy.get('.blog').eq(1).should('contain', 'a blog created by cypress');
       });
     });
   });
