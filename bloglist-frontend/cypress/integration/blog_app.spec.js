@@ -2,12 +2,18 @@ describe('Blog app', function () {
   beforeEach(function () {
     cy.request('POST', 'http://localhost:3003/api/testing/reset');
     cy.visit('http://localhost:3000');
-    const user = {
+    const user1 = {
+      username: 'user1',
+      name: 'user1',
+      password: 'user1'
+    };
+    const user2 = {
       username: 'user2',
       name: 'user2',
       password: 'user2'
     };
-    cy.request('POST', 'http://localhost:3003/api/users/', user);
+    cy.request('POST', 'http://localhost:3003/api/users/', user1);
+    cy.request('POST', 'http://localhost:3003/api/users/', user2);
     cy.visit('http://localhost:3000');
   });
 
@@ -71,6 +77,15 @@ describe('Blog app', function () {
       cy.contains('likes 0');
       cy.get('.likeBtn').click();
       cy.contains('likes 1');
+    });
+
+    it('user who create a blog can delete it', function () {
+      cy.contains('Blog Form').click();
+      cy.get('.titleInput').type('a blog created by cypress');
+      cy.get('.authorInput').type('Cypress');
+      cy.get('.urlInput').type('http//www.newBlog.com');
+      cy.get('.submitBtn').click();
+      cy.contains('a blog created by cypress');
     });
   });
 });
