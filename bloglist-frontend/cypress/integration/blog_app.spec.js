@@ -82,6 +82,17 @@ describe('Blog app', function () {
         cy.contains('Remove').click();
         cy.get('html').should('not.contain', 'a blog created by cypress');
       });
+
+      it('user can delete only blogs who create himself', function () {
+        cy.contains('a blog created by cypress');
+        cy.contains('logout').click();
+        cy.get('#username').type('user1');
+        cy.get('#password').type('user1');
+        cy.get('#login-button').click();
+        cy.contains('a blog created by cypress');
+        cy.contains('Remove').click();
+        cy.get('html').should('contain', 'a blog created by cypress');
+      });
     });
   });
 });
