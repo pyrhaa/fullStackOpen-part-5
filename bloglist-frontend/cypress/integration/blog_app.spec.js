@@ -54,38 +54,34 @@ describe('Blog app', function () {
       cy.login({ username: 'user2', password: 'user2' });
     });
 
-    it('A blog can be created', function () {
-      cy.contains('Blog Form').click();
-      cy.get('.titleInput').type('a blog created by cypress');
-      cy.get('.authorInput').type('Cypress');
-      cy.get('.urlInput').type('http//www.newBlog.com');
-      cy.get('.submitBtn').click();
-      cy.contains('a blog created by cypress');
-      cy.contains('Cypress');
-      cy.contains('view');
-      cy.contains('Remove');
-    });
+    describe('and a blog exists', function () {
+      beforeEach(function () {
+        cy.createBlog({
+          title: 'a blog created by cypress',
+          author: 'Cypress',
+          url: 'http//www.newBlog.com'
+        });
+      });
+      it('A blog can be created', function () {
+        cy.contains('a blog created by cypress');
+        cy.contains('Cypress');
+        cy.contains('view');
+        cy.contains('Remove');
+      });
 
-    it('Users can like a blog', function () {
-      cy.contains('Blog Form').click();
-      cy.get('.titleInput').type('a blog created by cypress');
-      cy.get('.authorInput').type('Cypress');
-      cy.get('.urlInput').type('http//www.newBlog.com');
-      cy.get('.submitBtn').click();
-      cy.contains('a blog created by cypress');
-      cy.contains('view').click();
-      cy.contains('likes 0');
-      cy.get('.likeBtn').click();
-      cy.contains('likes 1');
-    });
+      it('Users can like a blog', function () {
+        cy.contains('a blog created by cypress');
+        cy.contains('view').click();
+        cy.contains('likes 0');
+        cy.get('.likeBtn').click();
+        cy.contains('likes 1');
+      });
 
-    it('user who create a blog can delete it', function () {
-      cy.contains('Blog Form').click();
-      cy.get('.titleInput').type('a blog created by cypress');
-      cy.get('.authorInput').type('Cypress');
-      cy.get('.urlInput').type('http//www.newBlog.com');
-      cy.get('.submitBtn').click();
-      cy.contains('a blog created by cypress');
+      it('user who create a blog can delete it', function () {
+        cy.contains('a blog created by cypress');
+        cy.contains('Remove').click();
+        cy.get('html').should('not.contain', 'a blog created by cypress');
+      });
     });
   });
 });
